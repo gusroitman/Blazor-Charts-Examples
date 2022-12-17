@@ -1,0 +1,145 @@
+﻿@page "/mudbar"
+@using MudBlazor
+@using MudBlazor.Charts
+
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #000000;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<MudText Typo="Typo.h6">Datos Población en las 5 principales provincias Argentinas *.</MudText>
+<MudText Typo="Typo.body2">* En millones de habitantes.</MudText>
+<br /><br />
+
+
+<div> 
+    <MudChart ChartType="ChartType.Bar" ChartSeries="@Datos" @bind-SelectedIndex="Index" XAxisLabels="@XAxis" Width="100%" Height="350px" ChartOptions="opciones"></MudChart>
+    @switch (Index)
+    {
+        case 0:
+                <table>
+                <tr>    
+                <th>Provincia</th>
+                <th>Censo 2001 *</th>
+                <th>Censo 2010 *</th>
+                <th>Censo 2022 *</th>
+                </tr>
+                <tr>    
+                <td>@Datos[0].Name.ToString()</td>
+                <td>@Datos[0].Data[0].ToString()</td>
+                <td>@Datos[0].Data[1].ToString()</td>
+                <td>@Datos[0].Data[2].ToString()</td>
+                </tr>
+                </table>
+            break;
+        case 1:
+                <table>
+                <tr>    
+                <th>Provincia</th>
+                <th>Censo 2001 *</th>
+                <th>Censo 2010 *</th>
+                <th>Censo 2022 *</th>
+                </tr>
+                <tr>    
+                <td>@Datos[1].Name.ToString()</td>
+                <td>@Datos[1].Data[0].ToString()</td>
+                <td>@Datos[1].Data[1].ToString()</td>
+                <td>@Datos[1].Data[2].ToString()</td>
+                </tr>
+                </table>
+            break;
+        case 2:
+                <table>        
+                <tr>    
+                <th>Provincia</th>
+                <th>Censo 2001 *</th>
+                <th>Censo 2010 *</th>
+                <th>Censo 2022 *</th>
+                </tr>
+                <tr>    
+                <td>@Datos[2].Name.ToString()</td>
+                <td>@Datos[2].Data[0].ToString()</td>
+                <td>@Datos[2].Data[1].ToString()</td>
+                <td>@Datos[2].Data[2].ToString()</td>
+                </tr>
+                </table>
+            break;
+        case 3:
+                <table> 
+                <tr>    
+                <th>Provincia</th>
+                <th>Censo 2001 *</th>
+                <th>Censo 2010 *</th>
+                <th>Censo 2022 *</th>
+                </tr>
+                <tr>    
+                <td>@Datos[3].Name.ToString()</td>
+                <td>@Datos[3].Data[0].ToString()</td>
+                <td>@Datos[3].Data[1].ToString()</td>
+                <td>@Datos[3].Data[2].ToString()</td>
+                </tr>
+                </table>
+            break;
+        case 4:
+                <table> 
+                <tr>    
+                <th>Provincia</th>
+                <th>Censo 2001 *</th>
+                <th>Censo 2010 *</th>
+                <th>Censo 2022 *</th>
+                </tr>
+                <tr>    
+                <td>@Datos[4].Name.ToString()</td>
+                <td>@Datos[4].Data[0].ToString()</td>
+                <td>@Datos[4].Data[1].ToString()</td>
+                <td>@Datos[4].Data[2].ToString()</td>
+                </tr>
+                </table>
+            break;
+    }
+
+</div>
+
+
+
+
+
+@code {
+    private int Index = -1; 
+
+    private ChartOptions opciones = new ChartOptions();
+
+    protected override void OnInitialized()
+    {
+        //opciones.YAxisFormat = "c2";
+        opciones.MaxNumYAxisTicks = 20;
+        opciones.YAxisTicks = 1;
+        opciones.LineStrokeWidth = 3;
+    }
+
+    public List<ChartSeries> Datos = new List<ChartSeries>()
+    {
+        new ChartSeries() { Name = "Buenos Aires", Data = new double[] { 13.82 , 15.62, 17.59 } },
+        new ChartSeries() { Name = "Cordoba", Data = new double[] { 3.06, 3.30, 3.89} },
+        new ChartSeries() { Name = "Santa Fe", Data = new double[] { 3.00, 3.19, 3.60 } },
+        new ChartSeries() { Name = "CABA", Data = new double[] { 2.77, 2.89, 3.23 } },
+        new ChartSeries() { Name = "Mendoza", Data = new double[] { 1.57, 1.73, 2.00 } },
+    };
+
+    public string[] XAxis = { "Año 2001", "Año 2010", "Año 2021" };
+}
+
+

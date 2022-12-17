@@ -6,9 +6,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="Pages\Charts\Mud_bar.razor" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Blazor-ApexCharts" Version="0.9.16-beta" />
@@ -20,16 +17,6 @@
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\Charts\Mud_bar.razor" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\Charts\Mud_bar.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Pages\Charts\Mud_bar.razor" />
-  </ItemGroup>
 
 </Project>
