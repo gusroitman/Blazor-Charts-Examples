@@ -7,11 +7,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Charts\Mud_bar.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazor-ApexCharts" Version="0.9.16-beta" />
     <PackageReference Include="MudBlazor" Version="6.1.5" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Charts\Mud_bar.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Charts\Mud_bar.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Charts\Mud_bar.razor" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,16 @@
 ﻿<MudNavMenu>
-    <MudNavLink Href="/" Match="NavLinkMatch.All">Dashboard</MudNavLink>
-    <MudNavLink Href="/servers" Match="NavLinkMatch.Prefix">Servers</MudNavLink>
-    <MudNavGroup Title="Settings" Expanded="true">
-        <MudNavLink Href="/users"  Match="NavLinkMatch.Prefix">Users</MudNavLink>
-        <MudNavLink Href="/security"  Match="NavLinkMatch.Prefix">Security</MudNavLink>
+    <MudNavLink Href="/" Match="NavLinkMatch.All">Home</MudNavLink>
+    <MudNavLink Href="/info" Match="NavLinkMatch.Prefix">Blazor Charts</MudNavLink>
+    <MudNavGroup Title="MudBlazor Charts" Expanded="true">
+        <MudNavLink Href="/mud_bar"  Match="NavLinkMatch.Prefix">Bar Charts</MudNavLink>
+        <MudNavLink Href="/mud_donut"  Match="NavLinkMatch.Prefix">Donut Charts</MudNavLink>
+        <MudNavLink Href="/mud_pie"  Match="NavLinkMatch.Prefix">Pie Charts</MudNavLink>
+        <MudNavLink Href="/mud_line"  Match="NavLinkMatch.Prefix">Line Charts</MudNavLink>
     </MudNavGroup>
-    <MudNavLink Href="/about"  Match="NavLinkMatch.Prefix">About</MudNavLink>
+    <MudNavGroup Title="Apex Charts" Expanded="true">
+        <MudNavLink Href="/apex_bar"  Match="NavLinkMatch.Prefix">Bar Charts</MudNavLink>
+        <MudNavLink Href="/apex_donut"  Match="NavLinkMatch.Prefix">Donut Charts</MudNavLink>
+        <MudNavLink Href="/apex_pie"  Match="NavLinkMatch.Prefix">Pie Charts</MudNavLink>
+        <MudNavLink Href="/apex_line"  Match="NavLinkMatch.Prefix">Line Charts</MudNavLink>
+    </MudNavGroup>
 </MudNavMenu>
