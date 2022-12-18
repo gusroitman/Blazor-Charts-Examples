@@ -1,0 +1,164 @@
+﻿@page "/mudpie"
+@using MudBlazor
+@using MudBlazor.Charts
+
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #000000;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+</style>
+
+<MudText Typo="Typo.h6">Datos Población en las 5 principales provincias Argentinas *.</MudText>
+<MudText Typo="Typo.body2">* En millones de habitantes.</MudText>
+<br /><br />
+
+
+<div>
+<MudGrid>
+    <MudItem xs="12" sm="6">
+        <MudPaper Class="d-flex align-center justify-center mud-width-full py-8">
+            <MudChart ChartType="ChartType.Pie" InputData="@data2021" @bind-SelectedIndex="Index" LegendPosition="@LegendPosicion" InputLabels="@labels" Width="100%" Height="350px" >
+            </MudChart>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6">
+        <MudPaper Class="d-flex align-center justify-center mud-width-full py-8">
+            <MudChart ChartType="ChartType.Donut" InputData="@data2021" @bind-SelectedIndex="Index" LegendPosition="@LegendPosicion" InputLabels="@labels" Width="100%" Height="350px" >
+                <CustomGraphics>
+                    <text class="donut-inner-text" x="50%" y="42%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="3">Año</text>
+                    <text class="donut-inner-text" x="50%" y="53%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="3">2022</text>
+                </CustomGraphics>
+            </MudChart>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+<br /><br />
+    @switch (Index)
+    {
+        case 0:
+                        <table>
+                        <tr>    
+                        <th>Provincia</th>
+                        <th>Censo 2001 *</th>
+                        <th>Censo 2010 *</th>
+                        <th>Censo 2022 *</th>
+                        </tr>
+                        <tr>    
+                        <td>@labels[0].ToString()</td>
+                        <td>@data2001[0].ToString()</td>
+                        <td>@data2010[0].ToString()</td>
+                        <td>@data2021[0].ToString()</td>
+                        </tr>
+                        </table>
+            break;
+        case 1:
+                        <table>
+                        <tr>    
+                        <th>Provincia</th>
+                        <th>Censo 2001 *</th>
+                        <th>Censo 2010 *</th>
+                        <th>Censo 2022 *</th>
+                        </tr>
+                        <tr>    
+                        <td>@labels[1].ToString()</td>
+                        <td>@data2001[1].ToString()</td>
+                        <td>@data2010[1].ToString()</td>
+                        <td>@data2021[1].ToString()</td>
+                        </tr>
+                        </table>
+            break;
+        case 2:
+                        <table>        
+                        <tr>    
+                        <th>Provincia</th>
+                        <th>Censo 2001 *</th>
+                        <th>Censo 2010 *</th>
+                        <th>Censo 2022 *</th>
+                        </tr>
+                        <tr>    
+                        <td>@labels[2].ToString()</td>
+                        <td>@data2001[2].ToString()</td>
+                        <td>@data2010[2].ToString()</td>
+                        <td>@data2021[2].ToString()</td>
+                        </tr>
+                        </table>
+            break;
+        case 3:
+                        <table> 
+                        <tr>    
+                        <th>Provincia</th>
+                        <th>Censo 2001 *</th>
+                        <th>Censo 2010 *</th>
+                        <th>Censo 2022 *</th>
+                        </tr>
+                        <tr>    
+                        <td>@labels[3].ToString()</td>
+                        <td>@data2001[3].ToString()</td>
+                        <td>@data2010[3].ToString()</td>
+                        <td>@data2021[3].ToString()</td>
+                        </tr>
+                        </table>
+            break;
+        case 4:
+                        <table> 
+                        <tr>    
+                        <th>Provincia</th>
+                        <th>Censo 2001 *</th>
+                        <th>Censo 2010 *</th>
+                        <th>Censo 2022 *</th>
+                        </tr>
+                        <tr>    
+                        <td>@labels[4].ToString()</td>
+                        <td>@data2001[4].ToString()</td>
+                        <td>@data2010[4].ToString()</td>
+                        <td>@data2021[4].ToString()</td>
+                        </tr>
+                        </table>
+            break;
+    }
+
+</div>
+
+
+
+
+
+@code {
+    private int Index = -1;
+
+    public Position LegendPosicion { get; set; } = Position.Start;
+
+    public double[] data2001 = { 13.82, 3.06, 3.00, 2.77, 1.57 };
+    public double[] data2010 = { 15.62, 3.30, 3.19, 2.89, 1.73 };
+    public double[] data2021 = { 17.59, 3.89, 3.60, 3.23, 2.00 };
+
+    public string[] labels = { "Buenos Aires", "Cordoba", "Santa Fe", "CABA", "Mendoza" };
+
+    /*
+    public List<ChartSeries> Datos = new List<ChartSeries>()
+    {
+        new ChartSeries() { Name = "Buenos Aires", Data = new double[] { 13.82 , 15.62, 17.59 } },
+        new ChartSeries() { Name = "Cordoba", Data = new double[] { 3.06, 3.30, 3.89} },
+        new ChartSeries() { Name = "Santa Fe", Data = new double[] { 3.00, 3.19, 3.60 } },
+        new ChartSeries() { Name = "CABA", Data = new double[] { 2.77, 2.89, 3.23 } },
+        new ChartSeries() { Name = "Mendoza", Data = new double[] { 1.57, 1.73, 2.00 } },
+    };
+    */
+
+
+}
+
+

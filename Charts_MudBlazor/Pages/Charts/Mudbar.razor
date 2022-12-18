@@ -18,6 +18,10 @@ td, th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+.textochart { 
+  font: 20px Helvetica; fill: rgb(150,144,121);
+}
 </style>
 
 <MudText Typo="Typo.h6">Datos Población en las 5 principales provincias Argentinas *.</MudText>
@@ -25,8 +29,28 @@ tr:nth-child(even) {
 <br /><br />
 
 
-<div> 
-    <MudChart ChartType="ChartType.Bar" ChartSeries="@Datos" @bind-SelectedIndex="Index" XAxisLabels="@XAxis" Width="100%" Height="350px" ChartOptions="opciones"></MudChart>
+<div>
+<MudGrid>
+    <MudItem xs="12" sm="6">
+        <MudPaper Class="d-flex align-center justify-center mud-width-full py-8">
+            <MudChart ChartType="ChartType.Bar" ChartSeries="@Datos" @bind-SelectedIndex="Index" XAxisLabels="@XAxis" Width="100%" Height="350px" ChartOptions="opciones">
+                <CustomGraphics>
+                    <text x="120" y="75" class="textochart">Bar Chart</text>
+                </CustomGraphics>
+            </MudChart>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6">
+        <MudPaper Class="d-flex align-center justify-center mud-width-full py-8">
+            <MudChart ChartType="ChartType.Line" ChartSeries="@Datos" @bind-SelectedIndex="Index" XAxisLabels="@XAxis" Width="100%" Height="350px" ChartOptions="opciones">
+                <CustomGraphics>
+                    <text x="370" y="170" class="textochart">Line Chart</text>
+                </CustomGraphics>
+            </MudChart>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+<br /><br />
     @switch (Index)
     {
         case 0:
