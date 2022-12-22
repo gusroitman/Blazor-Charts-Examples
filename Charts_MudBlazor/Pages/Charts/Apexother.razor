@@ -1,0 +1,262 @@
+﻿@page "/Apexother"
+@using ApexCharts
+@using Charts_MudBlazor.Pages.ApexData
+
+<h3>Example Apex Other Charts</h3><br />
+
+<div class="d-flex p-2 justify-content-start flex-wrap">
+
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="Order"
+               Title="Scatter Sample">
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         Name="% Gross"
+                         SeriesType="SeriesType.Scatter"
+                         XValue="@(e => e.DiscountPercentage)"
+                         YValue="@(e => e.GrossValue)"
+                         OrderByDescending="e=>e.X" />
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         SeriesType="SeriesType.Scatter"
+                         Name="% Net"
+                         XValue="@(e => e.DiscountPercentage)"
+                         YValue="@(e => e.NetValue)"
+                         OrderByDescending="e=>e.X" />
+    </ApexChart>
+</div>
+
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="SupportIncident"
+               Title="Incident Severity"
+               Options=options>
+
+        <ApexPointTooltip>
+            <div class="m-2">
+                    @{
+                        var point = (ListPoint<SupportIncident>)context.DataPoint;
+
+                            <h3>@point.X</h3>
+                            <span class="me-1">Min:@point.Y?.Min()</span>
+                            <span class="me-1">Max:@point.Y?.Max()</span>
+                            <span class="me-1">Avg:@point.Y?.Average()</span>
+                            <span class="me-1">Count:@point.Y?.Count()</span>
+
+                    }
+            </div>
+        </ApexPointTooltip>
+
+        <ChildContent>
+
+            <ApexRangeSeries TItem="SupportIncident"
+                             Items="incidents"
+                             XValue="@(e => e.Source.ToString())"
+                             YValue="@(e =>e.Severity)" />
+        </ChildContent>
+</ApexChart>
+</div>
+
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+        <ApexChart TItem="Order"
+                   Title="Order Net Value"
+                   OnDataPointEnter="DataPointEnter"
+                   OnDataPointLeave=DataPointLeave>
+
+            <ApexPointSeries TItem="Order"
+                             Items="Orders"
+                             Name="Net Value"
+                             SeriesType="SeriesType.Line"
+                             XValue="@(e => e.Country)"
+                             YAggregate="@(e => e.Sum(e => e.NetValue))"
+                             OrderByDescending="e=>e.X" />
+
+            <ApexPointSeries TItem="Order"
+                             Items="Orders"
+                             Name="Gross Value"
+                             SeriesType="SeriesType.Bar"
+                             XValue="@(e => e.Country)"
+                             YAggregate="@(e => e.Sum(e => e.GrossValue))"
+                             OrderByDescending="e=>e.X" />
+        </ApexChart>
+</div>
+<div>
+        @if (hoverData != null)
+        {
+            
+                        <div class="g-col-6 g-col-md-4 p-3" style="max-width:400px;vertical-align:middle">
+                        @{
+                            var dataPoint = (DataPoint<Order>)hoverData.DataPoint;
+                                <h1>@hoverData.DataPoint.X</h1>
+                                <div>Name: @hoverData.Series.Name</div>
+                                <div>Value: @dataPoint.Y?.ToString("N0")</div>
+                        }
+                    </div>
+            
+        }
+</div>
+
+</div>
+<br />
+
+<h3>Example Range Projects & Async Loading Charts</h3><br />
+
+<div class="d-flex p-2 justify-content-start flex-wrap">
+
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+        @if (projects == null)
+        {
+            <div class="text-center text-muted" style="min-height:300px">
+                <h3>Loading chart<span class="animated-dots"></span></h3>
+            </div>
+        }
+        else
+        {
+            <ApexChart TItem="Project"
+               Title="Projects"
+               Options=options2
+               XAxisType="XAxisType.Datetime">
+                <ApexRangeSeries TItem="Project"
+                         Items="projects"
+                         XValue="@(e => e.Name)"
+                         YMinValue="@(e =>e.StartDate.ToUnixTimeMilliseconds())"
+                         YMaxValue="@(e =>e.EndDate.ToUnixTimeMilliseconds())" />
+            </ApexChart>
+        }
+
+</div>
+
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+        @if (Orders != null)
+        {
+            <ApexChart TItem="Order"
+               Title="Load data async - Simulate Api Call"
+               Options="options3"
+               @ref="chart">
+
+                           <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         SeriesType="@SeriesType.Bar"
+                         Name="Gross Value"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.GrossValue))"
+                         OrderByDescending="e=>e.Y" />
+
+                <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         SeriesType="@SeriesType.Bar"
+                         Name="Net Value"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.NetValue))"
+                         OrderByDescending="e=>e.Y" />
+
+            </ApexChart>
+
+        }
+        else
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; display: block; max-height: 250px;" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                <g transform="rotate(180 50 50)">
+                    <rect x="15" y="15" width="10" height="40" fill="#ebebeb">
+                        <animate attributeName="height" values="50;70;30;50" keyTimes="0;0.33;0.66;1" dur="1s" repeatCount="indefinite" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1" begin="-0.4s"></animate>
+                    </rect>
+                    <rect x="35" y="15" width="10" height="40" fill="#f0f0f0">
+                        <animate attributeName="height" values="50;70;30;50" keyTimes="0;0.33;0.66;1" dur="1s" repeatCount="indefinite" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1" begin="-0.2s"></animate>
+                    </rect>
+                    <rect x="55" y="15" width="10" height="40" fill="#ebebeb">
+                        <animate attributeName="height" values="50;70;30;50" keyTimes="0;0.33;0.66;1" dur="1s" repeatCount="indefinite" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1" begin="-0.6s"></animate>
+                    </rect>
+                    <rect x="75" y="15" width="10" height="40" fill="#f0f0f0">
+                        <animate attributeName="height" values="50;70;30;50" keyTimes="0;0.33;0.66;1" dur="1s" repeatCount="indefinite" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1;0.5 0 0.5 1" begin="-1s"></animate>
+                    </rect>
+                </g>
+            </svg>
+        }
+</div>
+
+</div>
+
+
+
+
+
+@code {
+    private List<Order> Orders { get; set; } = SampleData.GetOrders();
+    private List<StockPrice> stockPrices { get; set; } = SampleData.GetStockPrices();
+
+    private List<SupportIncident> incidents { get; set; } = SampleData.GetSupportIncidentsForRange();
+    private ApexChartOptions<SupportIncident> options;
+
+    private List<Project> projects;
+    private ApexChartOptions<Project> options2;
+    
+    private ApexChartOptions<Order> options3 { get; set; } = new();
+    private ApexChart<Order> chart;
+
+    private HoverData<Order> hoverData;
+
+    public void DataPointEnter(HoverData<Order> hoverData)
+    {
+        this.hoverData = hoverData;
+    }
+
+    public void DataPointLeave(HoverData<Order> hoverData)
+    {
+        this.hoverData = null;
+    }
+
+    protected override void OnInitialized()
+    {
+        options = new ApexChartOptions<SupportIncident>
+            {
+                PlotOptions = new PlotOptions
+                {
+                    Bar = new PlotOptionsBar
+                    {
+                        Horizontal = true
+                    }
+                }
+            };
+
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        options2 = new ApexChartOptions<Project>
+            {
+                PlotOptions = new PlotOptions
+                {
+                    Bar = new PlotOptionsBar
+                    {
+                        Horizontal = true
+                    }
+                },
+                Tooltip = new ApexCharts.Tooltip
+                {
+                    X = new TooltipX
+                    {
+                        Format = "dd MMM yyyy HH:mm"
+                    }
+                }
+            };
+        projects = await LoadProjects();
+        await LoadData();
+    }
+
+    private async Task<List<Project>> LoadProjects()
+    {
+        await Task.Delay(3000);
+        return SampleData.GetProjects();
+    }
+
+    private async Task LoadData()
+    {
+        await Task.Delay(5000); //Simulate External Api call
+        Orders = SampleData.GetOrders();
+    }
+
+
+
+    
+}

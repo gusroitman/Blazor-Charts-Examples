@@ -1,4 +1,4 @@
-﻿@page "/Apexbox"
+﻿@page "/Apexmisc"
 @using ApexCharts
 @using Charts_MudBlazor.Pages.ApexData
 
@@ -139,25 +139,24 @@
 
     protected override void OnInitialized()
     {
-        options.PlotOptions = new PlotOptions 
-        { 
-            BoxPlot = new PlotOptionsBoxPlot 
-            { 
-                
-                Colors = new BloxPlotColors 
-                { 
-                    Lower = "#ffa500",
-                    Upper = "#ee82ee"
-                }
-            },
-            Bar = new PlotOptionsBar 
-            { 
-                Horizontal = true 
-            }
+        options.PlotOptions = new PlotOptions
+            {
+                BoxPlot = new PlotOptionsBoxPlot
+                {
 
-        };
+                    Colors = new BloxPlotColors
+                    {
+                        Lower = "#ffa500",
+                        Upper = "#ee82ee"
+                    }
+                },
+                Bar = new PlotOptionsBar
+                {
+                    Horizontal = true
+                }
+
+            };
 
     }
 
 }
-
