@@ -8,7 +8,7 @@ namespace Charts_MudBlazor.Pages.ApexData
 {
     public class StockPrice
     {
-        public string Company { get; set; }
+        public string? Company { get; set; }
         public DateTimeOffset Date { get; set; }
         public decimal Open { get; set; }
         public decimal High { get; set; }

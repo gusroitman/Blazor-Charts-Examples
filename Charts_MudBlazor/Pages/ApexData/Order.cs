@@ -5,8 +5,8 @@ namespace Charts_MudBlazor.Pages.ApexData
     public class Order
     {
         public Guid OrderId { get; set; } = Guid.NewGuid();
-        public string CustomerName { get; set; }
-        public string Country { get; set; }
+        public string? CustomerName { get; set; }
+        public string? Country { get; set; }
         public DateTimeOffset OrderDate { get; set; }
         public OrderType OrderType { get; set; }
         public decimal GrossValue { get; set; }
