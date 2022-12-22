@@ -1,0 +1,171 @@
+﻿@page "/Apexpie"
+@using ApexCharts
+@using Charts_MudBlazor.Pages.ApexData
+
+<h3>Example Apex Pie & Donut Charts</h3><br />
+
+<div class="d-flex p-2 justify-content-start flex-wrap">
+
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="Order"
+               Title="Order Gross Value">
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         Name="Gross Value"
+                         SeriesType="SeriesType.Pie"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.GrossValue))"
+                         OrderByDescending="e=>e.Y" 
+                         />
+</ApexChart>
+</div>
+
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="Order"
+               Title="Order Gross Value">
+
+        <ApexPointSeries TItem="Order"
+                    Items="Orders"
+                    SeriesType="SeriesType.Donut"
+                    Name="Gross Value"
+                    XValue="@(e => e.Country)"
+                    YAggregate="@(e => e.Sum(e => e.GrossValue))"
+                    OrderByDescending="e=>e.Y" />
+</ApexChart>
+</div>
+
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="Order"
+               Title="Discount">
+
+     <ApexPointSeries TItem="Order"
+                     Items="Orders"
+                     SeriesType=SeriesType.RadialBar
+                     Name="Gross Value"
+                     XValue="@(e => e.Country)"
+                     YAggregate="@(e => decimal.Round(e.Average(e => e.DiscountPercentage)))"
+                     OrderByDescending="e=>e.Y" />
+    </ApexChart>
+</div>
+
+</div>
+<br />
+
+<h3>Example Apex Area Charts</h3><br />
+
+<div class="d-flex p-2 justify-content-start flex-wrap">
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="Order"
+           Title="Scatter Sample">
+
+    <ApexPointSeries TItem="Order"
+                Items="Orders"
+                 SeriesType="@SeriesType.Area"
+                Name="Gross Value"
+                XValue="@(e => e.Country)"
+                YAggregate="@(e => e.Sum(e => e.GrossValue))"
+                OrderByDescending="e=>e.Y" />
+
+    <ApexPointSeries TItem="Order"
+                Items="Orders"
+                 SeriesType="@SeriesType.Area"
+                Name="Net Value"
+                XValue="@(e => e.Country)"
+                YAggregate="@(e => e.Sum(e => e.NetValue))"
+                OrderByDescending="e=>e.Y" />
+</ApexChart>
+</div>
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="Order"
+               Title="Fill Sample"
+               Options=options2>
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         SeriesType="@SeriesType.Area"
+                         Name="Gross Value"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.GrossValue))"
+                         OrderByDescending="e=>e.Y" ShowDataLabels />
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         SeriesType="@SeriesType.Area"
+                         Name="Net Value"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.NetValue))"
+                         OrderByDescending="e=>e.Y" />
+    </ApexChart>
+</div>
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+    <ApexChart TItem="Order"
+               Title="Fill Sample"
+               Options=options
+               @ref=chart>
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         SeriesType="@SeriesType.Area"
+                         Name="Gross Value"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.GrossValue)-200000)" />
+    </ApexChart>
+</div>
+
+</div>
+
+
+
+
+@code {
+    private List<Order> Orders { get; set; } = SampleData.GetOrders();
+
+    private ApexChartOptions<Order> options;
+    private ApexChartOptions<Order> options2;
+
+    private ApexChart<Order> chart;
+    private AreaFillTo areaFillTo = AreaFillTo.Origin;
+
+
+
+    protected override void OnInitialized()
+    {
+        options = new ApexChartOptions<Order>
+            {
+                PlotOptions = new PlotOptions
+                {
+                    Area = new PlotOptionsArea
+                    {
+                        FillTo = areaFillTo
+                    }
+                }
+            };
+
+        options2 = new ApexChartOptions<Order>
+            {
+                Colors = new List<string> { "#32F16C", "#F13232" },
+
+                Fill = new Fill
+                {
+                    Type = new List<FillType> { FillType.Gradient, FillType.Gradient },
+                    Gradient = new FillGradient
+                    {
+                        ShadeIntensity = 1,
+                        OpacityFrom = 0.2,
+                        OpacityTo = 0.9,
+
+                    }
+                },
+
+
+            
+
+
+
+
+            };
+
+    }
+
+}

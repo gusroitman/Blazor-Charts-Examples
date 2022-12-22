@@ -1,0 +1,418 @@
+﻿@page "/Apexbar"
+@using ApexCharts
+@using Charts_MudBlazor.Pages.ApexData
+
+<h3>Example Apex Bar & Line Charts</h3><br />
+
+<div class="d-flex p-2 justify-content-start flex-wrap">
+
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="Order"
+           Title="Order Net Value">
+
+    <ApexPointSeries TItem="Order"
+                Items="Orders"
+                Name="Gross Value"
+                XValue="@(e => e.Country)"
+                YAggregate="@(e => e.Sum(e => e.GrossValue))"
+                OrderByDescending="e=>e.Y"
+                SeriesType="SeriesType.Bar"/>
+
+    <ApexPointSeries TItem="Order"
+                Items="Orders"
+                Name="Net Value"
+                XValue="@(e => e.Country)"
+                YAggregate="@(e => e.Sum(e => e.NetValue))"
+                OrderByDescending="e=>e.Y"
+                SeriesType="SeriesType.Bar"/>
+</ApexChart>
+</div>
+
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="Order"
+               Title="Order Net Value">
+
+    <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         Name="Gross Value"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.GrossValue))"
+                         OrderByDescending="e=>e.Y"
+                         SeriesType="SeriesType.Bar"
+                         Color="#005ba3"
+                         PointColor="e=> GetColor(e)" />
+</ApexChart>
+</div>
+
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="Order"
+               Title="Order Net Value"
+               Options=options2>
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         Name="Gross Value"
+                         SeriesType="SeriesType.Bar"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.GrossValue))"
+                         OrderByDescending="e=>e.Y"
+                         ShowDataLabels />
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         Name="Net Value"
+                         SeriesType="SeriesType.Bar"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.NetValue))"
+                         OrderByDescending="e=>e.Y"
+                         ShowDataLabels />
+</ApexChart>
+</div>
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="Order"
+               Title="Order Neto Value"
+               Options=options>
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         Name="Gross Value"
+                         SeriesType="SeriesType.Bar"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.GrossValue))"
+                         OrderByDescending="e=>e.Y"
+                         ShowDataLabels />
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         Name="Net Value"
+                         SeriesType="SeriesType.Bar"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.NetValue))"
+                         OrderByDescending="e=>e.Y"
+                         ShowDataLabels />
+</ApexChart>
+</div>
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="Order"
+               Title="Order Net Value"
+               Options=options4>
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         Name="Gross Value"
+                         SeriesType="SeriesType.Bar"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.GrossValue))"
+                         OrderByDescending="e=>e.Y"
+                         ShowDataLabels />
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         Name="Net Value"
+                         SeriesType="SeriesType.Bar"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.NetValue))"
+                         OrderByDescending="e=>e.Y"
+                         ShowDataLabels />
+</ApexChart>
+</div>
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="Project"
+               Title="Project Score">
+
+        <ApexPointSeries TItem="Project"
+                         Items="Projects"
+                         Name="Score"
+                         XValue="@(e => e.Name)"
+                         YAggregate="@(e => e.Sum(e => e.Score))"
+                         SeriesType="SeriesType.Bar"
+                         Color="#003399"
+                         DataPointMutator="PointMutator" />
+</ApexChart>
+</div>
+</div>
+<br />
+<h3>Example Apex Line Charts</h3><br />
+
+<div class="d-flex p-2 justify-content-start flex-wrap">
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="Order"
+               Title="Order Net Value">
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         Name="Gross Value"
+                         SeriesType="SeriesType.Line"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.GrossValue))"
+                         OrderByDescending="e=>e.Y" />
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         Name="Net Value"
+                         SeriesType="SeriesType.Line"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.NetValue))"
+                         OrderByDescending="e=>e.Y" />
+</ApexChart>
+</div>
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="Order"
+               Title="Order Net Value"
+               Options="@options5">
+
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         Name="Gross Value"
+                         SeriesType="SeriesType.Line"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.GrossValue))"
+                         OrderByDescending="e=>e.Y"
+                         ShowDataLabels />
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         Name="Net Value"
+                         SeriesType="SeriesType.Line"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.NetValue))"
+                         OrderByDescending="e=>e.Y"
+                         ShowDataLabels />
+</ApexChart>
+</div>
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="Order"
+               Title="Series Stroke"
+               Options="@options3">
+
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         Name="Gross Value"
+                         SeriesType="SeriesType.Line"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.GrossValue))"
+                         OrderByDescending="e=>e.Y"
+                         Stroke="@(new ApexCharts.SeriesStroke { Color = "#FF0000", DashSpace = 0, Width = 5 })" />
+
+        <ApexPointSeries TItem="Order"
+                         Items="Orders"
+                         Name="Net Value"
+                         SeriesType="SeriesType.Line"
+                         XValue="@(e => e.Country)"
+                         YAggregate="@(e => e.Sum(e => e.NetValue))"
+                         OrderByDescending="e=>e.Y"
+                         Stroke="@(new ApexCharts.SeriesStroke { Color = "#000080", DashSpace = 3, Width = 3 })" />
+</ApexChart>
+</div>
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="SimpleValue"
+               Title="Order Net Value" Debug>
+
+        <ApexPointSeries TItem="SimpleValue"
+                         Items="Datas"
+                         Name="Gross Value"
+                         SeriesType="SeriesType.Line"
+                         XValue="@(e => e.Name)"
+                         YValue="@(e => e.Value)" />
+
+</ApexChart>
+</div>
+</div>
+
+
+
+
+
+
+
+
+@code {
+    private List<Order> Orders { get; set; } = SampleData.GetOrders();
+    private List<Project> Projects { get; set; } = SampleData.GetProjects();
+    private List<SimpleValue> Datas { get; set; } = SampleData.GetSimpleValues();
+
+    private ApexChartOptions<Order> options;
+    private ApexChartOptions<Order> options2;
+    private ApexChartOptions<Order> options3;
+    private ApexChartOptions<Order> options4;
+    private ApexChartOptions<Order> options5;
+
+    protected override void OnInitialized()
+    {
+        options = new ApexChartOptions<Order>
+            {
+                PlotOptions = new PlotOptions
+                {
+                    Bar = new PlotOptionsBar
+                    {
+                        Horizontal = true
+                    }
+                }
+            };
+
+        options2 = new ApexChartOptions<Order>
+            {
+                Chart = new Chart
+                {
+                    Stacked = true,
+                },
+                PlotOptions = new PlotOptions
+                {
+                    Bar = new PlotOptionsBar
+                    {
+                        Horizontal = false,
+                        BorderRadius = 10,
+                    }
+                },
+                Colors = new List<string> { "#5cb85c", "#d9534f" }
+            };
+
+        options3 = new ApexChartOptions<Order>
+            {
+                Chart = new Chart
+                {
+                    Toolbar = new Toolbar
+                    {
+                        Show = false
+                    }
+                }
+
+            };
+           
+
+        options4 = new ApexChartOptions<Order>
+            {
+                Chart = new Chart
+                {
+                    Stacked = true,
+                    StackType = StackType.Percent100,
+                    Toolbar = new Toolbar
+                    {
+                        Show = false
+                    }
+                },
+                PlotOptions = new PlotOptions
+                {
+                    Bar = new PlotOptionsBar
+                    {
+                        Horizontal = true,
+                    }
+                },
+                Theme = new Theme { Mode = Mode.Light, Palette = PaletteType.Palette8 },
+
+                Xaxis = new XAxis
+                {
+                    Title = new AxisTitle
+                    {
+                        Text = "Percentage",
+                        Style = new AxisTitleStyle
+                        {
+                            FontSize = "14px"
+                        }
+                    },
+                    Labels = new XAxisLabels
+                    {
+                        Style = new AxisLabelStyle
+                        {
+                            FontSize = "14px"
+                        }
+                    }
+                },
+                Yaxis = new List<YAxis> { new YAxis
+                {
+                     Title = new AxisTitle
+                    {
+                        Text = "Country",
+                        Style = new AxisTitleStyle {
+                            FontSize = "14px"
+                        }
+                    },
+                    Labels = new YAxisLabels {
+                        Style = new AxisLabelStyle {
+                            FontSize = "14px"
+                        } }
+
+                }},
+                Legend = new Legend
+                {
+                    Position = LegendPosition.Right
+                }
+            };
+
+        options5 = new ApexChartOptions<Order>
+            {
+                Chart = new Chart
+                {
+                    Toolbar = new Toolbar
+                    {
+                        Show = false
+                    },
+                    DropShadow = new DropShadow
+                    {
+                        Enabled = true,
+                        Color = "",
+                        Top = 18,
+                        Left = 7,
+                        Blur = 10,
+                        Opacity = 0.2d
+                    }
+                },
+                DataLabels = new ApexCharts.DataLabels
+                {
+                    OffsetY = -6d
+                },
+                Grid = new Grid
+                {
+                    BorderColor = "#e7e7e7",
+                    Row = new GridRow
+                    {
+                        Colors = new List<string> { "#f3f3f3", "transparent" },
+                        Opacity = 0.5d
+                    }
+                },
+
+                Colors = new List<string> { "#77B6EA", "#545454" },
+                Markers = new Markers { Shape = ShapeEnum.Circle, Size = 5, FillOpacity = new Opacity(0.8d) },
+                Stroke = new Stroke { Curve = Curve.Smooth },
+                Legend = new Legend
+                {
+                    Position = LegendPosition.Top,
+                    HorizontalAlign = ApexCharts.Align.Right,
+                    Floating = true,
+                    OffsetX = -5,
+                    OffsetY = -25
+                },
+
+            };
+
+            
+
+        
+    }
+
+    private string GetColor(Order order)
+    {
+        if (order.Country == "France")
+        {
+            return "#ffd500";
+        }
+        return null;
+    }
+
+    private void PointMutator(IDataPoint<Project> point)
+    {
+        var dataPoint = (DataPoint<Project>)point;
+        if (dataPoint.Y > 0)
+        {
+            dataPoint.FillColor = "#003399";
+        }
+        else
+        {
+            dataPoint.FillColor = "#e62e00";
+        }
+    }
+
+   
+}

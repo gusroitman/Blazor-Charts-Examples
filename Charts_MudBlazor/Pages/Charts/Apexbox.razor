@@ -1,0 +1,143 @@
+﻿@page "/Apexbox"
+@using ApexCharts
+@using Charts_MudBlazor.Pages.ApexData
+
+<h3>Example Apex Box & Candle Charts</h3><br />
+
+<div class="d-flex p-2 justify-content-start flex-wrap">
+
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="BoxPlotSample" Debug>
+
+        <ApexBoxPlotSeries TItem="BoxPlotSample"
+                    Items="incidents"
+                    Name="incidents"
+                    XValue="@(e => e.Name)"
+                    Max="@(e => e.Max)"
+                    Min="@(e => e.Min)"
+                    Quantile1="@(e => e.Q1)"
+                    Quantile3="@(e => e.Q3)"
+                    Median="@(e => e.Median)"
+                    />
+</ApexChart>
+</div>
+
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="BoxPlotSample" Options=options>
+
+        <ApexBoxPlotSeries TItem="BoxPlotSample"
+                    Items="incidents"
+                    Name="incidents"
+                    XValue="@(e => e.Name)"
+                    Max="@(e => e.Max)"
+                    Min="@(e => e.Min)"
+                    Quantile1="@(e => e.Q1)"
+                    Quantile3="@(e => e.Q3)"
+                    Median="@(e => e.Median)"
+                    />
+</ApexChart>
+</div>
+
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="StockPrice"
+               XAxisType="XAxisType.Datetime">
+
+        <ApexCandleSeries TItem="StockPrice"
+                          Items="stockPrices"
+                          Name="Apex Stock Price"
+                          XValue="@(e => e.Date.DayOnly().ToUnixTimeMilliseconds())"
+                          Open="@(e => e.Open)"
+                          High="@(e => e.High)"
+                          Low="@(e => e.Low)"
+                          Close="@(e => e.Close)"
+                          OrderByDescending="e=> e.X" 
+                          Stroke="@(new SeriesStroke{ Width=1 })"
+                          />
+
+        <ApexPointSeries Items=stockPrices
+                         TItem="StockPrice"
+                         Name="Line"
+                         SeriesType="SeriesType.Line"
+                         XValue="@(e => e.Date.DayOnly().ToUnixTimeMilliseconds())"
+                         YValue="@(e => e.Low - 3)"
+                         OrderByDescending="@(e=> e.X)"
+                         Stroke="@(new SeriesStroke{ Width=3, DashSpace=3, Color="#ff3300" })"
+                          />
+</ApexChart>
+</div>
+
+</div>
+<br />
+
+<h3>Example Apex Dispersion Charts</h3><br />
+
+<div class="d-flex p-2 justify-content-start flex-wrap">
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<ApexChart TItem="Order"
+           Title="Scatter Sample">
+
+    <ApexPointSeries TItem="Order"
+                Items="Orders"
+                 SeriesType="@SeriesType.Area"
+                Name="Gross Value"
+                XValue="@(e => e.Country)"
+                YAggregate="@(e => e.Sum(e => e.GrossValue))"
+                OrderByDescending="e=>e.Y" />
+
+    <ApexPointSeries TItem="Order"
+                Items="Orders"
+                 SeriesType="@SeriesType.Area"
+                Name="Net Value"
+                XValue="@(e => e.Country)"
+                YAggregate="@(e => e.Sum(e => e.NetValue))"
+                OrderByDescending="e=>e.Y" />
+</ApexChart>
+</div>
+
+
+
+</div>
+
+
+
+
+@code {
+    private List<Order> Orders { get; set; } = SampleData.GetOrders();
+    private List<BoxPlotSample> incidents { get; set; } = SampleData.GetBoxPlotData();
+    private List<StockPrice> stockPrices { get; set; } = SampleData.GetStockPrices();
+
+    private ApexChartOptions<BoxPlotSample> options { get; set; } = new();
+
+
+
+
+
+
+    protected override void OnInitialized()
+    {
+        options.PlotOptions = new PlotOptions 
+        { 
+            BoxPlot = new PlotOptionsBoxPlot 
+            { 
+                
+                Colors = new BloxPlotColors 
+                { 
+                    Lower = "#ffa500",
+                    Upper = "#ee82ee"
+                }
+            },
+            Bar = new PlotOptionsBar 
+            { 
+                Horizontal = true 
+            }
+
+        };
+
+
+
+        //options.PlotOptions = new PlotOptions { Bar = new PlotOptionsBar { Horizontal = true } };
+
+    }
+
+}
+
