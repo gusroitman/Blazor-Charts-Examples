@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -6,17 +6,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-
-  <ItemGroup>
+    <ItemGroup>
     <PackageReference Include="Blazor-ApexCharts" Version="0.9.16-beta" />
     <PackageReference Include="MudBlazor" Version="6.1.6" />
     <PackageReference Include="PSC.Blazor.Components.Chartjs" Version="6.0.35" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
+
+
 
 
 

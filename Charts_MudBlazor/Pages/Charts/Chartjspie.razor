@@ -1,0 +1,185 @@
+﻿@page "/Chartjspie"
+@using PSC.Blazor.Components.Chartjs
+@using PSC.Blazor.Components.Chartjs.Enums
+@using PSC.Blazor.Components.Chartjs.Models
+@using PSC.Blazor.Components.Chartjs.Models.Common
+@using PSC.Blazor.Components.Chartjs.Models.Doughnut
+@using PSC.Blazor.Components.Chartjs.Models.Pie
+@using PSC.Blazor.Components.Chartjs.Models.Polar
+@using PSC.Blazor.Components.Chartjs.Models.Radar
+@using Charts_MudBlazor.Pages.Chartjs
+
+<h3>Example ChartJs Pie & Donut Charts</h3><br />
+
+<div class="d-flex p-2 justify-content-start flex-wrap">
+
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<Chart Config="_config1" @ref="_chart1"></Chart>
+</div>
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<Chart Config="_config2" @ref="_chart2"></Chart>
+</div>
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<Chart Config="_config3" @ref="_chart3"></Chart>
+</div>
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<Chart Config="_config4" @ref="_chart4"></Chart>
+</div>
+</div>
+
+<br />
+<h3>Example ChartJs Radar & Polar Charts</h3><br />
+
+<div class="d-flex p-2 justify-content-start flex-wrap">
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<Chart Config="_config5" @ref="_chart5"></Chart>
+</div>
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<Chart Config="_config6" @ref="_chart6"></Chart>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+@code {
+    private PieChartConfig? _config1;
+    private Chart? _chart1;
+    private PieChartConfig? _config2;
+    private Chart? _chart2;
+    private PieChartConfig? _config3;
+    private Chart? _chart3;
+
+    private DoughnutChartConfig? _config4;
+    private Chart? _chart4;
+
+    private RadarChartConfig? _config5;
+    private Chart? _chart5;
+
+    private PolarChartConfig? _config6;
+    private Chart? _chart6;
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        _config1 = new PieChartConfig()
+        {
+        };
+
+        _config1.Data.Labels = PieDataExamples.SimplePieText;
+        _config1.Data.Datasets.Add(new PieDataset()
+            {
+                Label = "First Dataset",
+                Data = PieDataExamples.SimplePie.ToList(),
+                BackgroundColor = Chartjs.Colors.PaletteBorder1,
+                HoverOffset = 4
+            });
+
+        _config2 = new PieChartConfig()
+            {
+                Options = new PieOptions()
+                {
+                    Responsive = true,
+                    MaintainAspectRatio = false,
+                    Rotation = -90,
+                    Circumference = 180
+                }
+            };
+
+        _config2.Data.Labels = PieDataExamples.SimplePieText;
+        _config2.Data.Datasets.Add(new PieDataset()
+            {
+                Label = "First Dataset",
+                Data = PieDataExamples.SimplePie.ToList(),
+                BackgroundColor = Chartjs.Colors.PaletteBorder1,
+                HoverOffset = 4
+            });
+
+        _config3 = new PieChartConfig()
+            {
+                Options = new PieOptions()
+                {
+                    Responsive = true,
+                    MaintainAspectRatio = false
+                }
+            };
+
+        _config3.Data.Labels = PieDataExamples.MultiPieText;
+        _config3.Data.Datasets.Add(new PieDataset()
+            {
+                Data = PieDataExamples.MultiPie1,
+                BackgroundColor = PieDataExamples.MultiPieBackground1,
+            });
+        _config3.Data.Datasets.Add(new PieDataset()
+            {
+                Data = PieDataExamples.MultiPie2,
+                BackgroundColor = PieDataExamples.MultiPieBackground2,
+            });
+        _config3.Data.Datasets.Add(new PieDataset()
+            {
+                Data = PieDataExamples.MultiPie3,
+                BackgroundColor = PieDataExamples.MultiPieBackground3,
+            });
+        _config3.Data.Datasets.Add(new PieDataset()
+            {
+                Data = PieDataExamples.MultiPie4,
+                BackgroundColor = PieDataExamples.MultiPieBackground4,
+            });
+
+        _config4 = new DoughnutChartConfig()
+            {
+                Options = new Options()
+                {
+                    Responsive = true,
+                    MaintainAspectRatio = false,
+                    Plugins = new Plugins()
+                    {
+                        Legend = new Legend()
+                        {
+                            Display = true,
+                            Position = LegendPosition.Left
+                        }
+                    }
+                }
+            };
+
+        _config4.Data.Labels = PieDataExamples.SimplePieText;
+        _config4.Data.Datasets.Add(new DoughnutDataset()
+            {
+                Label = "First Dataset",
+                Data = PieDataExamples.SimplePie.ToList(),
+                BackgroundColor = Chartjs.Colors.PaletteBorder1,
+                HoverOffset = 4
+            });
+
+        _config5 = new RadarChartConfig()
+        {
+        };
+
+        _config5.Data.Labels = RadarDataExamples.RadarSimpleText;
+        _config5.Data.Datasets.AddRange(RadarDataExamples.RadarDatasets);
+
+        _config6 = new PolarChartConfig()
+            {
+                Options = new Options()
+                {
+                    Responsive = true,
+                    MaintainAspectRatio = false
+                }
+            };
+
+        _config6.Data.Labels = PolarDataExamples.SimplePolarText;
+        _config6.Data.Datasets.Add(new PolarDataset()
+            {
+                Label = "Value",
+                Data = PolarDataExamples.SimplePolar,
+                BackgroundColor = Chartjs.Colors.Palette1,
+            });
+    }
+}

@@ -1,0 +1,190 @@
+﻿@page "/Chartjsmixed"
+@using PSC.Blazor.Components.Chartjs
+@using PSC.Blazor.Components.Chartjs.Enums
+@using PSC.Blazor.Components.Chartjs.Models
+@using PSC.Blazor.Components.Chartjs.Models.Common
+@using PSC.Blazor.Components.Chartjs.Models.Bar
+@using PSC.Blazor.Components.Chartjs.Models.Bubble
+@using PSC.Blazor.Components.Chartjs.Models.Doughnut
+@using PSC.Blazor.Components.Chartjs.Models.Line
+@using PSC.Blazor.Components.Chartjs.Models.Pie
+@using PSC.Blazor.Components.Chartjs.Models.Polar
+@using PSC.Blazor.Components.Chartjs.Models.Radar
+@using PSC.Blazor.Components.Chartjs.Models.Scatter
+@using Charts_MudBlazor.Pages.Chartjs
+
+<h3>Example ChartJs Pie & Donut Charts</h3><br />
+
+<div class="d-flex p-2 justify-content-start flex-wrap">
+
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<Chart Config="_config1" @ref="_chart1"></Chart>
+</div>
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<Chart Config="_config2" @ref="_chart2"></Chart>
+</div>
+<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
+<Chart Config="_config3" @ref="_chart3"></Chart>
+</div>
+</div>
+
+@code {
+    private BarChartConfig? _config1;
+    private Chart? _chart1;
+
+    private BarChartConfig? _config2;
+    private Chart? _chart2;
+
+    private BarChartConfig? _config3;
+    private Chart? _chart3;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _config1 = new BarChartConfig()
+            {
+                Options = new Options()
+                {
+                    Responsive = true,
+                    MaintainAspectRatio = false,
+                    Plugins = new Plugins()
+                    {
+                        Legend = new Legend()
+                        {
+                            Align = PSC.Blazor.Components.Chartjs.Models.Common.Align.Center,
+                            Display = false,
+                            Position = LegendPosition.Right
+                        }
+                    },
+                    Scales = new Dictionary<string, Axis>()
+                {
+                    {
+                        Scales.XAxisId, new Axis()
+                        {
+                            Stacked = true,
+                            Ticks = new Ticks()
+                            {
+                                MaxRotation = 0,
+                                MinRotation = 0
+                            }
+                        }
+                    },
+                    {
+                        Scales.YAxisId, new Axis()
+                        {
+                            Stacked = true,
+                            Title = new AxesTitle()
+                            {
+                                Display = true,
+                                Text = "This is an Y title"
+                            }
+                        }
+                    }
+                }
+                }
+            };
+
+        _config1.Data.Labels = BarDataExamples.SimpleBarText;
+        _config1.Data.Datasets.Add(new BarDataset()
+            {
+                Label = "Value",
+                Data = BarDataExamples.SimpleBar.Select(l => l.Value).ToList(),
+                BackgroundColor = Chartjs.Colors.Palette1,
+                BorderColor = Chartjs.Colors.PaletteBorder1,
+                BorderWidth = 1
+            });
+        _config1.Data.Datasets.Add(new BarDataset()
+            {
+                Label = "Bar Dataset",
+                Data = LineDataExamples.SimpleLine.ToList(),
+                BorderColor = Chartjs.Colors.PaletteBorder1,
+                Order = 1,
+                Type = "line"
+            });
+
+        _config2 = new BarChartConfig()
+            {
+                Options = new Options()
+                {
+                    Plugins = new Plugins()
+                    {
+                        Title = new Title()
+                        {
+                            Display = true,
+                            Text = "Population growth (millions)",
+                            Font = new Font()
+                            {
+                                Size = 18
+                            }
+                        }
+                    }
+                }
+            };
+
+        _config2.Data.Labels = BarDataExamples.GroupedLabels;
+        _config2.Data.Datasets.Add(new BarDataset()
+            {
+                Label = "Africa",
+                Data = BarDataExamples.Grouped1.ToList(),
+                BackgroundColor = new List<string>() { "#3e95cd" }
+            });
+        _config2.Data.Datasets.Add(new BarDataset()
+            {
+                Label = "Europe",
+                Data = BarDataExamples.Grouped2.ToList(),
+                BackgroundColor = new List<string>() { "#8e5ea2" }
+            });
+
+        _config3 = new BarChartConfig()
+            {
+                Options = new Options()
+                {
+                    Responsive = true,
+                    MaintainAspectRatio = false,
+                    Plugins = new Plugins()
+                    {
+                        Title = new Title()
+                        {
+                            Display = true,
+                            Text = "Population growth (millions): Europe & Africa"
+                        },
+                        Legend = new Legend()
+                        {
+                            Display = false
+                        }
+                    }
+                }
+            };
+
+        _config3.Data.Labels = new List<string>() { "1900", "1950", "1999", "2050" };
+        _config3.Data.Datasets.Add(new BarDataset()
+            {
+                Label = "Europe",
+                Type = "line",
+                Data = new List<decimal>() { 408, 547, 675, 734 },
+                BorderColor = new List<string>() { "#8e5ea2" },
+                Fill = false
+            });
+        _config3.Data.Datasets.Add(new BarDataset()
+            {
+                Label = "Africa",
+                Type = "line",
+                Data = new List<decimal>() { 133, 221, 783, 2478 },
+                BorderColor = new List<string>() { "#3e95cd" }
+            });
+        _config3.Data.Datasets.Add(new BarDataset()
+            {
+                Label = "Europe",
+                Type = "bar",
+                Data = new List<decimal>() { 408, 547, 675, 734 },
+                BackgroundColor = new List<string>() { "rgba(0,0,0,0.2)" }
+            });
+        _config3.Data.Datasets.Add(new BarDataset()
+            {
+                Label = "Africa",
+                Type = "bar",
+                Data = new List<decimal>() { 133, 221, 783, 2478 },
+                BackgroundColor = new List<string>() { "rgba(0,0,0,0.2)" },
+                HoverBackgroundColor = new List<string>() { "#3e95cd" }
+            });
+    }
+}
