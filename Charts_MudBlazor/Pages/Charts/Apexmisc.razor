@@ -2,161 +2,82 @@
 @using ApexCharts
 @using Charts_MudBlazor.Pages.ApexData
 
-<h3>Example Apex Box & Candle Charts</h3><br />
+<h3>Example Apex Theme Charts</h3><br />
 
 <div class="d-flex p-2 justify-content-start flex-wrap">
 
 <div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
-<ApexChart TItem="BoxPlotSample" Debug>
-
-        <ApexBoxPlotSeries TItem="BoxPlotSample"
-                    Items="incidents"
-                    Name="incidents"
-                    XValue="@(e => e.Name)"
-                    Max="@(e => e.Max)"
-                    Min="@(e => e.Min)"
-                    Quantile1="@(e => e.Q1)"
-                    Quantile3="@(e => e.Q3)"
-                    Median="@(e => e.Median)"
-                    />
-</ApexChart>
-</div>
-
-<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
-<ApexChart TItem="BoxPlotSample" Options=options>
-
-        <ApexBoxPlotSeries TItem="BoxPlotSample"
-                    Items="incidents"
-                    Name="incidents"
-                    XValue="@(e => e.Name)"
-                    Max="@(e => e.Max)"
-                    Min="@(e => e.Min)"
-                    Quantile1="@(e => e.Q1)"
-                    Quantile3="@(e => e.Q3)"
-                    Median="@(e => e.Median)"
-                    />
-</ApexChart>
-</div>
-
-<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
-<ApexChart TItem="StockPrice"
-               XAxisType="XAxisType.Datetime">
-
-        <ApexCandleSeries TItem="StockPrice"
-                          Items="stockPrices"
-                          Name="Apex Stock Price"
-                          XValue="@(e => e.Date.DayOnly().ToUnixTimeMilliseconds())"
-                          Open="@(e => e.Open)"
-                          High="@(e => e.High)"
-                          Low="@(e => e.Low)"
-                          Close="@(e => e.Close)"
-                          OrderByDescending="e=> e.X" 
-                          Stroke="@(new SeriesStroke{ Width=1 })"
-                          />
-
-        <ApexPointSeries Items=stockPrices
-                         TItem="StockPrice"
-                         Name="Line"
-                         SeriesType="SeriesType.Line"
-                         XValue="@(e => e.Date.DayOnly().ToUnixTimeMilliseconds())"
-                         YValue="@(e => e.Low - 3)"
-                         OrderByDescending="@(e=> e.X)"
-                         Stroke="@(new SeriesStroke{ Width=3, DashSpace=3, Color="#ff3300" })"
-                          />
-</ApexChart>
-</div>
-
-</div>
-<br />
-
-<h3>Example Apex Radar Charts</h3><br />
-
-<div class="d-flex p-2 justify-content-start flex-wrap">
-
-<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
-<ApexChart TItem="Order"
-               Title="Order  Value"
-               Debug>
+<Row class="mb-3">
+    <div class="me-2" Auto>
+        <MudButton OnClick="OnToggledChanged" Variant="Variant.Filled" Color="MudBlazor.Color.Primary">
+            @if (ThemeOn)
+            {
+                <MudText>Click me for Dark Theme</MudText>
+            }
+            else
+            {
+                <MudText>Click me for Light Theme</MudText>
+            }
+        </MudButton>
+    </div>
+</Row>
+<br /><br />
+    <ApexChart TItem="Order"
+               Title="Order Gross Value"
+               Options=options
+               @ref=chart>
 
         <ApexPointSeries TItem="Order"
                          Items="Orders"
+                         SeriesType="SeriesType.Pie"
                          Name="Gross Value"
-                         SeriesType="SeriesType.Radar"
                          XValue="@(e => e.Country)"
                          YAggregate="@(e => e.Sum(e => e.GrossValue))"
-                         OrderByDescending="e=>e.Y"
-
-                          />
-
-        <ApexPointSeries TItem="Order"
-                         Items="Orders"
-                         Name="Net Value"
-                         SeriesType="SeriesType.Radar"
-                         XValue="@(e => e.Country)"
-                         YAggregate="@(e => e.Sum(e => e.NetValue))"
-                         OrderByDescending="e=>e.Y"
-                          />
-</ApexChart>
-</div>
-
-<div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
-<ApexChart TItem="Order"
-               Title="Order Value">
-
-        <ApexPointSeries TItem="Order"
-                         Items="Orders"
-                         Name="Gross Value"
-                         SeriesType="SeriesType.Radar"
-                         XValue="@(e => e.Country)"
-                         YAggregate="@(e => e.Sum(e => e.GrossValue))"
-                         OrderByDescending="e=>e.Y"
-                         ShowDataLabels />
-
-        <ApexPointSeries TItem="Order"
-                         Items="Orders"
-                         Name="Net Value"
-                         SeriesType="SeriesType.Radar"
-                         XValue="@(e => e.Country)"
-                         YAggregate="@(e => e.Sum(e => e.NetValue))"
-                         OrderByDescending="e=>e.Y"
-                          />
+                         OrderByDescending="e=>e.Y" />
     </ApexChart>
 </div>
-
-
-
 </div>
 
+@code 
+{
 
-
-
-@code {
     private List<Order> Orders { get; set; } = SampleData.GetOrders();
-    private List<BoxPlotSample> incidents { get; set; } = SampleData.GetBoxPlotData();
-    private List<StockPrice> stockPrices { get; set; } = SampleData.GetStockPrices();
+    private ApexChartOptions<Order> options;
+    private ApexChart<Order>? chart;
+    private List<PaletteType> paletteTypes = Enum.GetValues(typeof(PaletteType)).Cast<PaletteType>().ToList();
 
-    private ApexChartOptions<BoxPlotSample> options { get; set; } = new();
+    public bool ThemeOn { get; set; } = true;
 
     protected override void OnInitialized()
     {
-        options.PlotOptions = new PlotOptions
+        options = new ApexChartOptions<Order>
             {
-                BoxPlot = new PlotOptionsBoxPlot
+                Theme = new Theme
                 {
-
-                    Colors = new BloxPlotColors
-                    {
-                        Lower = "#ffa500",
-                        Upper = "#ee82ee"
-                    }
-                },
-                Bar = new PlotOptionsBar
-                {
-                    Horizontal = true
+                    Mode = Mode.Light,
+                    Palette = PaletteType.Palette1
                 }
-
             };
 
     }
+
+    public void OnToggledChanged()
+    {
+        if (!ThemeOn)
+        {
+            options.Theme.Mode = Mode.Light;
+            UpdateChart();
+            ThemeOn = true;
+
+        }
+        else
+        {
+            options.Theme.Mode = Mode.Dark;
+            UpdateChart();
+            ThemeOn = false;
+        }
+    }
+
+    private Task UpdateChart() => chart.RenderAsync();
 
 }

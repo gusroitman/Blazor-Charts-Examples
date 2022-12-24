@@ -2,7 +2,7 @@
 {
     public class BoxPlotSample
     {
-        public string? Name { get; set; }
+        public string Name { get; set; }
         public DateTimeOffset EventDate { get; set; }
 
         public decimal Min { get; set; }
