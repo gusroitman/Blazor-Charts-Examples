@@ -9,7 +9,8 @@
 
   <ItemGroup>
     <PackageReference Include="Blazor-ApexCharts" Version="0.9.16-beta" />
-    <PackageReference Include="MudBlazor" Version="6.1.5" />
+    <PackageReference Include="MudBlazor" Version="6.1.6" />
+    <PackageReference Include="PSC.Blazor.Components.Chartjs" Version="6.0.35" />
   </ItemGroup>
 
   <ItemGroup>
