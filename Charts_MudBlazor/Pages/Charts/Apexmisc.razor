@@ -2,14 +2,12 @@
 @using ApexCharts
 @using Charts_MudBlazor.Pages.ApexData
 
-<h3>Example Apex Theme Charts</h3><br />
-
 <div class="d-flex p-2 justify-content-start flex-wrap">
 
 <div class="g-col-6 g-col-md-4" style="min-width:400px;max-width:500px">
 <Row class="mb-3">
     <div class="me-2" Auto>
-        <MudButton OnClick="OnToggledChanged" Variant="Variant.Filled" Color="MudBlazor.Color.Primary">
+        <MudButton Size="Size.Small" OnClick="OnToggledChanged" Variant="Variant.Filled" Color="MudBlazor.Color.Primary">
             @if (ThemeOn)
             {
                 <MudText>Click me for Dark Theme</MudText>
@@ -18,6 +16,9 @@
             {
                 <MudText>Click me for Light Theme</MudText>
             }
+        </MudButton>
+        <MudButton Size="Size.Small" OnClick="OnPaletteChanged" Variant="Variant.Filled" Color="MudBlazor.Color.Primary">
+            <MudText>Change Palette </MudText>
         </MudButton>
     </div>
 </Row>
@@ -35,6 +36,46 @@
                          YAggregate="@(e => e.Sum(e => e.GrossValue))"
                          OrderByDescending="e=>e.Y" />
     </ApexChart>
+
+</div>
+<div class="g-col-6 g-col-md-4" style="min-width:600px;max-width:800px">
+<ApexChart TItem="TimeSeries"
+           Title="Value"
+           Options=options1
+           Height="200"
+           XAxisType="XAxisType.Datetime"
+          >
+
+    <ApexPointSeries TItem="TimeSeries"
+                     Items="data"
+                     Name="Value"
+                     SeriesType="SeriesType.Line"
+                     XValue="@(e => e.Date)"
+                     YAggregate="@(e => e.Sum(e => e.Value))"
+                     OrderBy="e=>e.X"
+                     Stroke="@(new SeriesStroke { Width = 2, Color="#1F15E5"})" />
+</ApexChart>
+
+<ApexChart TItem="TimeSeries"
+           Title="Quantity"
+           Options=options2
+           Height="200"
+           XAxisType="XAxisType.Datetime"
+            OnBrushScrolled=BrushScroll>
+
+    <ApexPointSeries TItem="TimeSeries"
+                     Items="data"
+                     Name="Quantity"
+                     SeriesType="SeriesType.Bar"
+                     XValue="@(e => e.Date)"
+                     YValue="@(e => e.Quantity)"
+                     OrderBy="e=>e.X"
+                     Stroke="@(new SeriesStroke { Width = 2, Color="#E51C15"})" />
+</ApexChart>
+</div>
+<div class="ma-5 pa-5">
+<h3 class="mt-2">XAxis Min: @XMin.ToString("d")</h3>
+<h3 class="mt-2">XAxis Max: @XMax.ToString("d")</h3>
 </div>
 </div>
 
@@ -48,6 +89,15 @@
 
     public bool ThemeOn { get; set; } = true;
 
+    private List<TimeSeries> data { get; set; } = new TimeSeriesGenerator(100).TimeSeries;
+    private ApexChartOptions<TimeSeries> options1 = new();
+    private ApexChartOptions<TimeSeries> options2 = new();
+
+    private DateTimeOffset XMin;
+    private DateTimeOffset XMax;
+
+    private string palettes = null;
+
     protected override void OnInitialized()
     {
         options = new ApexChartOptions<Order>
@@ -59,6 +109,26 @@
                 }
             };
 
+        const string mainChartId = "mainChart";
+
+        options1.Chart.Id = mainChartId;
+        options1.Chart.Toolbar = new Toolbar { AutoSelected = AutoSelected.Pan, Show = false };
+
+        XMin = data.Min(e => e.Date).AddDays(30);
+        XMax = XMin.AddDays(40);
+
+        options2.Chart.Toolbar = new Toolbar { Show = false };
+        options2.Xaxis = new XAxis { TickPlacement = TickPlacement.On };
+        options2.Chart.Brush = new ApexCharts.Brush { Enabled = true, Target = mainChartId };
+        options2.Chart.Selection = new Selection
+            {
+                Enabled = true,
+                Xaxis = new SelectionXaxis
+                {
+                    Min = XMin.ToUnixTimeMilliseconds(),
+                    Max = XMax.ToUnixTimeMilliseconds()
+                }
+            };
     }
 
     public void OnToggledChanged()
@@ -75,6 +145,29 @@
             options.Theme.Mode = Mode.Dark;
             UpdateChart();
             ThemeOn = false;
+        }
+    }
+
+    public void OnPaletteChanged()
+    {
+        Random rand = new Random();
+        int index = rand.Next(paletteTypes.Count);
+        options.Theme.Palette = paletteTypes[index];
+        UpdateChart();
+    }
+
+    private void BrushScroll(SelectionData<TimeSeries> selection)
+    {
+        var min = selection?.XAxis?.Min;
+        if (min != null)
+        {
+            XMin = DateTimeOffset.FromUnixTimeMilliseconds((long)min);
+        }
+
+        var max = selection?.XAxis?.Max;
+        if (max != null)
+        {
+            XMax = DateTimeOffset.FromUnixTimeMilliseconds((long)max);
         }
     }
 
