@@ -1,4 +1,4 @@
-﻿@page "/Radzenbar"
+﻿@page "/Radzenpie"
 @using System.Globalization
 @using Radzen.Blazor
 @using Radzen
@@ -12,19 +12,11 @@
                     <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels"></RadzenCheckBox>
                     <RadzenLabel Text="Show Data Labels" For="dataLabels" Style="margin-left: 8px; vertical-align: middle;" />
                 </RadzenCard>
-                <h4>Custom size bar series</h4>
+                <h4>Pie series</h4>
                 <RadzenChart style="height: 400px" Class="mb-3">
-                    <RadzenBarSeries Data="@revenue2020" CategoryProperty="Quarter" Title="2020" LineType="LineType.Dashed" ValueProperty="Revenue">
+                    <RadzenPieSeries Data="@revenue2019" Title="Revenue" CategoryProperty="Quarter" ValueProperty="Revenue">
                         <RadzenSeriesDataLabels Visible="@showDataLabels" />
-                    </RadzenBarSeries>
-                    <RadzenBarSeries Data="@revenue2019" CategoryProperty="Quarter" Title="2019" ValueProperty="Revenue">
-                        <RadzenSeriesDataLabels Visible="@showDataLabels" />
-                    </RadzenBarSeries>
-                    <RadzenValueAxis Formatter="@FormatAsUSD">
-                        <RadzenGridLines Visible="true" />
-                        <RadzenAxisTitle Text="Revenue in USD" />
-                    </RadzenValueAxis>
-                    <RadzenBarOptions Radius="5" Height="20"/>
+                    </RadzenPieSeries>
                 </RadzenChart>
             </div>
             <div class="g-col-6 g-col-md-6" style="min-width:500px;max-width:550px">
@@ -32,134 +24,66 @@
                     <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels"></RadzenCheckBox>
                     <RadzenLabel Text="Show Data Labels" For="dataLabels" Style="margin-left: 8px; vertical-align: middle;" />
                 </RadzenCard>
-                <h4>Vertical bar series</h4>
+                <h4>Donut series</h4>
                 <RadzenChart style="height: 400px" Class="mb-3">
-                    <RadzenColumnSeries Data="@revenue2020" CategoryProperty="Quarter" Title="2020" LineType="LineType.Dashed" ValueProperty="Revenue">
-                        <RadzenSeriesDataLabels Visible="@showDataLabels" />
-                    </RadzenColumnSeries>
-                    <RadzenColumnSeries Data="@revenue2019" CategoryProperty="Quarter" Title="2019" ValueProperty="Revenue">
-                        <RadzenSeriesDataLabels Visible="@showDataLabels" />
-                    </RadzenColumnSeries>
-                    <RadzenColumnOptions Radius="5" />
-                    <RadzenCategoryAxis Padding="20" />
-                    <RadzenValueAxis Formatter="@FormatAsUSD">
-                        <RadzenGridLines Visible="true" />
-                        <RadzenAxisTitle Text="Revenue in USD" />
-                    </RadzenValueAxis>
-                </RadzenChart>
-            </div>
-            <div class="g-col-6 g-col-md-6" style="min-width:500px;max-width:550px">
-                <RadzenCard Class="w-100 mb-4" Style="display: flex; align-items: center; gap: 0.5rem" >
-                    <RadzenCheckBox @bind-Value="@smooth" Name="smooth"></RadzenCheckBox>
-                    <RadzenLabel Text="Smooth" For="smooth" Style="margin-right: 1rem;"/>
-                    <RadzenCheckBox @bind-Value="@showDataLabelsarea" Name="dataLabels"></RadzenCheckBox>
-                    <RadzenLabel Text="Show Data Labels" For="dataLabels" />
-                </RadzenCard>
-                <h4>Area series</h4>
-                <RadzenChart style="height: 400px" Class="mb-3">
-                    <RadzenAreaSeries Smooth="@smooth" Data="@revenue2019area" CategoryProperty="Date" Title="2019" ValueProperty="Revenue" RenderingOrder="1">
-                        <RadzenSeriesDataLabels Visible="@showDataLabelsarea" />
-                    </RadzenAreaSeries>
-                    <RadzenAreaSeries Smooth="@smooth" Data="@revenue2020area" CategoryProperty="Date" Title="2020" LineType="LineType.Dashed" ValueProperty="Revenue">
-                        <RadzenSeriesDataLabels Visible="@showDataLabelsarea" />
-                    </RadzenAreaSeries>
-                    <RadzenCategoryAxis Padding="20" Formatter="@FormatAsMonth" />
-                    <RadzenValueAxis Formatter="@FormatAsUSD">
-                        <RadzenGridLines Visible="true" />
-                        <RadzenAxisTitle Text="Revenue in USD" />
-                    </RadzenValueAxis>
-                </RadzenChart>
-            </div>
-            <div class="g-col-6 g-col-md-6" style="min-width:500px;max-width:550px">
-                <RadzenCard Class="w-100 mb-4" Style="display: flex; align-items: center; gap: 0.5rem" >
-                    <RadzenCheckBox @bind-Value="@smoothline" Name="smooth"></RadzenCheckBox>
-                    <RadzenLabel Text="Smooth" For="smooth" Style="margin-right: 1rem;"/>
-                    <RadzenCheckBox @bind-Value="@showDataLabelsline" Name="dataLabels"></RadzenCheckBox>
-                    <RadzenLabel Text="Show Data Labels" For="dataLabels" />
-                </RadzenCard>
-                <h4>Line series</h4>
-                <RadzenChart style="height: 400px" Class="mb-3">
-                    <RadzenLineSeries Smooth="@smoothline" Data="@revenue2019area" CategoryProperty="Date" Title="2019" LineType="LineType.Dashed" ValueProperty="Revenue">
-                        <RadzenMarkers MarkerType="MarkerType.Square" />
-                        <RadzenSeriesDataLabels Visible="@showDataLabelsline" />
-                    </RadzenLineSeries>
-                    <RadzenLineSeries Smooth="@smoothline" Data="@revenue2020area" CategoryProperty="Date" Title="2020" ValueProperty="Revenue">
-                        <RadzenMarkers MarkerType="MarkerType.Circle" />
-                        <RadzenSeriesDataLabels Visible="@showDataLabelsline" />
-                    </RadzenLineSeries>
-                    <RadzenCategoryAxis Padding="20" Formatter="@FormatAsMonth" />
-                    <RadzenValueAxis Formatter="@FormatAsUSD">
-                        <RadzenGridLines Visible="true" />
-                        <RadzenAxisTitle Text="Revenue in USD" />
-                    </RadzenValueAxis>
-                </RadzenChart>
-            </div>
-            <div class="g-col-6 g-col-md-6" style="min-width:500px;max-width:550px">
-                <RadzenCard Class="w-100 mb-4" Style="display: flex; align-items: center; gap: 0.5rem" >
-                    <RadzenCheckBox @bind-Value="@trend" Name="trend"></RadzenCheckBox>
-                    <RadzenLabel Text="Trend" For="trend" Style="margin-right: 1rem;" Class="rz-color-danger-dark" />
-                    <RadzenCheckBox @bind-Value="@median" Name="median"></RadzenCheckBox>
-                    <RadzenLabel Text="Median" For="median" Style="margin-right: 1rem;" Class="rz-color-success-dark" />
-                    <RadzenCheckBox @bind-Value="@mean" Name="mean"></RadzenCheckBox>
-                    <RadzenLabel Text="Mean" For="mean" Style="margin-right: 1rem;" Class="rz-color-info-dark" />
-                    <RadzenCheckBox @bind-Value="@mode" Name="mode"></RadzenCheckBox>
-                    <RadzenLabel Text="Mode" For="mode" Class="rz-color-warning-darker" />
-                </RadzenCard>
-                <h4>Trend series</h4>
-                <RadzenChart style="height: 400px" Class="mb-3">
-                    <RadzenLineSeries Smooth="true" Data="@revenue2019area" CategoryProperty="Date" Title="2019" ValueProperty="Revenue" RenderingOrder="1">
-                        <RadzenSeriesTrendLine Visible="@trend" Stroke="var(--rz-danger-dark)" LineType="LineType.Dashed" />
-                        <RadzenSeriesMedianLine Visible="@median" Stroke="var(--rz-success-dark)" LineType="LineType.Dotted" />
-                        <RadzenSeriesMeanLine Visible="@mean" Stroke="var(--rz-info-dark)" LineType="LineType.Dotted" />
-                        <RadzenSeriesModeLine Visible="@mode" Stroke="var(--rz-warning-darker)" LineType="LineType.Dotted" />
-                    </RadzenLineSeries>
-                    <RadzenCategoryAxis Padding="20" Formatter="@FormatAsMonth" />
-                    <RadzenValueAxis Formatter="@FormatAsUSD">
-                        <RadzenGridLines Visible="true" />
-                        <RadzenAxisTitle Text="Revenue in USD" />
-                    </RadzenValueAxis>
-                </RadzenChart>
-            </div>
-            <div class="g-col-6 g-col-md-6" style="min-width:500px;max-width:550px">
-                <RadzenCard Class="w-100 mb-4" >
-                    <RadzenCheckBox @bind-Value="@annotation" Name="annotation"></RadzenCheckBox>
-                    <RadzenLabel Text="Annotation" For="annotation" Style="margin-left: 8px; vertical-align: middle;" />
-                </RadzenCard>
-                <h4>Annotations line series</h4>
-                <RadzenChart style="height: 400px" Class="mb-3">
-                    <RadzenLineSeries Smooth="true" Data="@revenue2019area" CategoryProperty="Date" Title="2019" ValueProperty="Revenue" RenderingOrder="1">
-                        <RadzenSeriesAnnotation Visible="@annotation" TItem="DataItem2" Data="@revenue2019area[1]" OffsetY="-16" Text="Negotiation" />
-                        <RadzenSeriesAnnotation Visible="@annotation" TItem="DataItem2" Data="@revenue2019area[2]" OffsetY="-16" Text="Acquisition" />
-                        <RadzenSeriesAnnotation Visible="@annotation" TItem="DataItem2" Data="@revenue2019area[4]" OffsetY="-16" Text="Merger" />
-                        <RadzenMarkers MarkerType="MarkerType.Circle" />
-                    </RadzenLineSeries>
-                    <RadzenCategoryAxis Padding="20" Formatter="@FormatAsMonth" />
-                    <RadzenValueAxis Formatter="@FormatAsUSD">
-                        <RadzenGridLines Visible="true" />
-                        <RadzenAxisTitle Text="Revenue in USD" />
-                    </RadzenValueAxis>
+                    <RadzenDonutSeries Data="@revenue2020" CategoryProperty="Quarter" ValueProperty="Revenue">
+                        <ChildContent>
+                            <RadzenSeriesDataLabels Visible="@showDataLabels" />
+                        </ChildContent>
+                        <TitleTemplate>
+                            <div class="rz-donut-content">
+                                <div>Revenue</div> 
+                                <div>for 2020</div>
+                            </div>
+                        </TitleTemplate>
+                    </RadzenDonutSeries>
                 </RadzenChart>
             </div>
         </div>
-            <div class="g-col-6 g-col-md-6" style="min-width:500px;max-width:550px">
-                <RadzenCard Class="w-100 mb-4" Style="display: flex; align-items: center; gap: 0.5rem">
-                    <RadzenLabel Text="Interpolation" For="interpolation" Style="margin-right: 1rem;"/>
-                    <RadzenDropDown AllowClear="false" Name="interpolation" @bind-Value="@interpolation"
-                                    TValue="Interpolation" ValueProperty="Value" TextProperty="Text"
-                                    Data="@(Enum.GetValues<Interpolation>().Select(v => new { Value = v, Text = $"{v:G}" }))"/>
-                </RadzenCard>
-                <h4>Interpolation line series</h4>
-                <RadzenChart style="height: 400px" Class="mb-3">
-                    <RadzenLineSeries Interpolation="@interpolation" Data="@revenue2020area" CategoryProperty="Date" Title="2019" LineType="LineType.Dashed" ValueProperty="Revenue" />
-                    <RadzenAreaSeries Interpolation="@interpolation" Data="@revenue2019area" CategoryProperty="Date" Title="2020" ValueProperty="Revenue" />
-                    <RadzenCategoryAxis Padding="20" Formatter="@FormatAsMonth"/>
-                    <RadzenValueAxis Formatter="@FormatAsUSD">
-                        <RadzenGridLines Visible="true"/>
-                        <RadzenAxisTitle Text="Revenue in USD"/>
-                    </RadzenValueAxis>
+        <div class="row my-5">
+            <div class="g-col-6 g-col-md-6" style="min-width:500px;max-width:750px">
+                <RadzenCard Class="mt-4 w-100 mb-4 d-flex align-items-center" >
+                    <RadzenLabel Text="Color scheme:" Class="mt-3" Style="margin-right: 8px; vertical-align: middle;" />
+                    <RadzenDropDown Data="@colorSchemes" @bind-Value="@colorScheme" />
+                </RadzenCard>  
+                <RadzenChart ColorScheme="@colorScheme" style="height: 400px" Class="mb-3">
+                        @for (var year = 2013; year <= 2020; year++)
+                        {
+                            var currentYearRevenue = revenue.Where(r => r.Year == year).ToList();
+                            <RadzenColumnSeries Data="@currentYearRevenue" CategoryProperty="Quarter" Title="@year.ToString()" ValueProperty="Revenue" />
+                        }
+                    <RadzenColumnOptions Margin="0" />
+                    <RadzenValueAxis Formatter="@FormatAsUSD" />
+                </RadzenChart>
+            
+                <RadzenChart ColorScheme="@colorScheme" style="height: 300px" Class="mb-3">
+                    <RadzenPieSeries Data="@revenue.Where(r => r.Year == 2020)" Title="Revenue" CategoryProperty="Quarter" ValueProperty="Revenue" />
                 </RadzenChart>
             </div>
-        
+        </div>
+        <h4>Custom color series</h4>
+        <div class="row my-5">
+            <div class="col-sm-12">
+                <RadzenChart>
+                    <RadzenAreaSeries Stroke="rgb(236,72,127)" StrokeWidth="2" Fill="rgba(236,72,127,.5)" Data="@revenue.Where(r => r.Year == 2020)" CategoryProperty="Quarter" ValueProperty="Revenue">
+                        <ChildContent>
+                            <RadzenMarkers MarkerType="MarkerType.Circle" Fill="#fff" Stroke="rgba(236,72,127)" StrokeWidth="2" Size="8" />
+                        </ChildContent>
+                        <TooltipTemplate Context="data">
+                            Revenue for <span>@data.Quarter</span> 2020: <strong>@data.Revenue.ToString("C0", CultureInfo.CreateSpecificCulture("en-US"))</strong>
+                        </TooltipTemplate>
+                    </RadzenAreaSeries>
+                    <RadzenCategoryAxis>
+                        <RadzenGridLines Visible="true" Stroke="#ccc" LineType="LineType.Dashed" />
+                    </RadzenCategoryAxis>
+                    <RadzenValueAxis>
+                        <RadzenGridLines Visible="true" />
+                    </RadzenValueAxis>
+                    <RadzenChartTooltipOptions Style="border: 1px solid rgb(236,72,127); background: #eee; color: #000;" />
+                    <RadzenLegend Visible="false" />
+                </RadzenChart>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -167,23 +91,15 @@
 
 @code {
     bool showDataLabels = false;
-    bool showDataLabelsarea = false;
-    bool showDataLabelsline = false;
-    bool smooth = true;
-    bool smoothline = true;
-    bool annotation = true;
 
-    Interpolation interpolation = Interpolation.Line;
+    IEnumerable<ColorScheme> colorSchemes = Enum.GetValues(typeof(ColorScheme)).Cast<ColorScheme>();
+    ColorScheme colorScheme = ColorScheme.Palette;
 
-    //for trend series
-    bool trend = true;
-    bool median = false;
-    bool mean = false;
-    bool mode = false;
-
+    IList<DataItem> revenue = new List<DataItem>();
 
     class DataItem
     {
+        public int Year { get; set; }
         public string Quarter { get; set; }
         public double Revenue { get; set; }
     }
@@ -199,14 +115,22 @@
         return ((double)value).ToString("C0", CultureInfo.CreateSpecificCulture("en-US"));
     }
 
-    string FormatAsMonth(object value)
+    protected override void OnInitialized()
     {
-        if (value != null)
-        {
-            return Convert.ToDateTime(value).ToString("MMM");
-        }
+        var random = new Random();
 
-        return string.Empty;
+        for (var year = 2013; year <= 2020; year++)
+        {
+            for (var quarter = 1; quarter <= 4; quarter++)
+            {
+                revenue.Add(new DataItem
+                    {
+                        Year = year,
+                        Quarter = $"Q{quarter}",
+                        Revenue = random.NextDouble() * 200000
+                    });
+            }
+        }
     }
 
     DataItem[] revenue2019 = new DataItem[]
@@ -256,70 +180,5 @@
         },
 
     };
-    DataItem2[] revenue2019area = new DataItem2[] {
-        new DataItem2
-        {
-            Date = ("2019-01-01"),
-            Revenue = 234000
-        },
-        new DataItem2
-        {
-            Date = ("2019-02-01"),
-            Revenue = 269000
-        },
-        new DataItem2
-        {
-            Date = ("2019-03-01"),
-            Revenue = 233000
-        },
-        new DataItem2
-        {
-            Date = ("2019-04-01"),
-            Revenue = 244000
-        },
-        new DataItem2
-        {
-            Date = ("2019-05-01"),
-            Revenue = 214000
-        },
-        new DataItem2
-        {
-            Date = ("2019-06-01"),
-            Revenue = 253000
-        },
-    };
 
-    DataItem2[] revenue2020area = new DataItem2[] {
-        new DataItem2
-        {
-            Date = ("2019-01-01"),
-            Revenue = 334000
-        },
-        new DataItem2
-        {
-            Date = ("2019-02-01"),
-            Revenue = 369000
-        },
-        new DataItem2
-        {
-            Date = ("2019-03-01"),
-            Revenue = 333000
-        },
-        new DataItem2
-        {
-            Date = ("2019-04-01"),
-            Revenue = 344000
-        },
-        new DataItem2
-        {
-            Date = ("2019-05-01"),
-            Revenue = 314000
-        },
-        new DataItem2
-        {
-            Date = ("2019-06-01"),
-            Revenue = 353000
-        },
-    };
-}
 }
