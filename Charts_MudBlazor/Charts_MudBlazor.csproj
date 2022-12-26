@@ -6,10 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+
     <ItemGroup>
     <PackageReference Include="Blazor-ApexCharts" Version="0.9.16-beta" />
     <PackageReference Include="MudBlazor" Version="6.1.6" />
     <PackageReference Include="PSC.Blazor.Components.Chartjs" Version="6.0.35" />
+    <PackageReference Include="Radzen.Blazor" Version="4.4.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,7 +20,7 @@
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
-
+ 
 
 
 
