@@ -1,4 +1,7 @@
-### Hello! I´m Gustavo :wave:
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/gusroitman/Blazor-Charts-Examples?logoColor=red)
+![.Net](https://img.shields.io/badge/.NET-5C2D91?logo=.net&logoColor=white)
+![Blazor](https://img.shields.io/badge/blazor-%235C2D91.svg?logo=blazor&logoColor=white)
+### Hello! I´m Gustavo :wave: 
 
 ### I made some different examples for making charts in Blazor using different free libraries like MudBlazor - Apex - ChartJs and Radzen. :chart:
 
