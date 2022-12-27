@@ -44,7 +44,7 @@ builder.Services.AddMudServices();
 ![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/images/chartsample1.png?raw=true)
 ![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/images/chartsample1.png?raw=true)
 ![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/wwwroot/images/chartsample1.png?raw=true)
-![This is an image](wwwroot/images/chartsample1.png)
+![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/charts_mudblazor/wwwroot/images/chartsample1.png?raw=true)
 ![This is an image](../wwwroot/images/chartsample1.png)
 ![This is an image](../../wwwroot/images/chartsample1.png)
 
