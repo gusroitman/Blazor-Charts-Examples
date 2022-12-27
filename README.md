@@ -41,12 +41,14 @@ builder.Services.AddMudServices();
 
 #### Some screenshots of the different libraries used :
 
-![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/images/chartsample1.png?raw=true)
-![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/images/chartsample1.png?raw=true)
-![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/Charts_MudBlazor/images/chartsample1.png)
-![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/Charts_MudBlazor/wwwroot/images/chartsample1.png)
-![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/Charts_MudBlazor/wwwroot/images/chartsample1.png?raw=true)
-![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/Charts_MudBlazor/blob/wwwroot/images/chartsample1.png)
-![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/Charts_MudBlazor/blob/images/chartsample1.png)
+![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample1.png)
+![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample2.png)
+![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample3.png)
+![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample4.png)
+![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample5.png)
+![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample6.png)
+![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample7.png)
+![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample8.png)
+![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample9.png)
 
 If you have any questions feel free to ask. :right_anger_bubble:
