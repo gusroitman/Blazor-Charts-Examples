@@ -2,7 +2,9 @@
 
 ### I made some different examples for making charts in Blazor using different free libraries like MudBlazor - Apex - ChartJs and Radzen. :chart:
 
-#### To Do list : 
+#### To Do list :
+
+> - [X] Write this readme 
 > - [ ] Cleaning Code 
 > - [ ] Better Organization of data struct 
 > - [ ] Convert Sample data in my own Sample data
