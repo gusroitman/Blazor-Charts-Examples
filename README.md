@@ -2,6 +2,12 @@
 
 ### I made some different examples for making charts in Blazor using different free libraries like MudBlazor - Apex - ChartJs and Radzen. :chart:
 
+#### To Do list :
+- [ ] Cleaning Code
+- [ ] Better Organization of data struct
+- [ ] Convert Sample Data to my own Sample Data
+
+---
 #### You can find the libraries at the following links :
 
 * [MudBlazor](https://mudblazor.com/)
@@ -38,17 +44,26 @@
 ```
 builder.Services.AddMudServices();
 ```
+---
 
 #### Some screenshots of the different libraries used :
 
 ![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample1.png)
+
 ![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample2.png)
+
 ![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample3.png)
+
 ![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample4.png)
+
 ![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample5.png)
+
 ![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample6.png)
+
 ![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample7.png)
+
 ![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample8.png)
+
 ![This is an image](https://github.com/gusroitman/Blazor-Charts-Examples/blob/master/Charts_MudBlazor/wwwroot/images/chartsample9.png)
 
 If you have any questions feel free to ask. :right_anger_bubble:
