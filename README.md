@@ -41,7 +41,7 @@ builder.Services.AddMudServices();
 
 #### Some screenshots of the different libraries used :
 
-![This is an image](../assets/images/chartsample1.png)
+![This is an image](../../assets/images/chartsample1.png)
 ![This is an image](/assets/images/electrocat.png)
 ![This is an image](/assets/images/electrocat.png)
 ![This is an image](/assets/images/electrocat.png)
