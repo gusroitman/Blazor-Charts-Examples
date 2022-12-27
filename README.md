@@ -41,11 +41,11 @@ builder.Services.AddMudServices();
 
 #### Some screenshots of the different libraries used :
 
+![This is an image](../wwwroot/images/chartsample1.png)
 ![This is an image](../../images/chartsample1.png)
-![This is an image](/assets/images/electrocat.png)
-![This is an image](/assets/images/electrocat.png)
-![This is an image](/assets/images/electrocat.png)
-![This is an image](/assets/images/electrocat.png)
+![This is an image](../images/chartsample1.png)
+![This is an image](wwwroot/images/chartsample1.png)
+![This is an image](/wwwroot/images/chartsample1.png)
 
 
 If you have any questions feel free to ask. :right_anger_bubble:
