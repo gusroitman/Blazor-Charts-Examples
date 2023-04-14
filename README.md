@@ -17,7 +17,7 @@
 
 * [MudBlazor](https://mudblazor.com/)
 * [Apexcharts Wrapper for Blazor](https://apexcharts.com/)
-* [Chartjs wrapper for Blazor](https://www.iheartblazor.com/welcome)
+* [Chartjs wrapper for Blazor](https://chartjs.puresourcecode.com/)
 * [Radzen](https://www.radzen.com/)
 
 
